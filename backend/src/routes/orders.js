@@ -25,6 +25,8 @@ router.get('/', async (req, res) => {
 
     res.json(enrichedOrders);
   } catch (err) {
+    // res.status(500).json({ error: 'Failed to fetch orders' });
+    console.log("ERROR FETCHING ORDERS:", err); 
     res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
@@ -54,6 +56,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { customer_id, product_id, quantity, shipping_address } = req.body;
+
+    if (!customer_id || !product_id || !quantity || quantity <= 0 || !shipping_address) { // Validation Added
+      return res.status(400).json({ error: 'Invalid input' });
+    }
 
     // Check inventory
     const productResult = await pool.query('SELECT * FROM products WHERE id = $1', [product_id]);
