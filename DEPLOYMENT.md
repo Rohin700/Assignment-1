@@ -57,6 +57,17 @@ Deployment Improvements
     Access the application:
         1. Frontend: http://localhost:3000
         2. Backend API: http://localhost:3001/api
+            ## Backend API
+            Base URL:
+                http://localhost:3001/api
+            ### Available Endpoints
+                - GET    /api/orders          → Fetch all orders
+                - GET    /api/orders/:id      → Fetch single order
+                - POST   /api/orders          → Create order
+                - PATCH  /api/orders/:id/status → Update order status
+                - POST   /api/orders/:id/cancel → Cancel order
+            ### Test Example
+            http://localhost:3001/api/orders
         3. Database: PostgreSQL running on port 5432
         
 
